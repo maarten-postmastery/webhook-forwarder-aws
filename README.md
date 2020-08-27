@@ -81,12 +81,7 @@ You can click on the API name to open the API Gateway console.
 
 You can open Details under the API Gateway entry to view the API endpoint URL.
 
-Allow Lambda execution role to publish to SNS topics.
-
-1. Select the Permission tab.
-2. Click the role name to open it in IAM.
-3. Click + Add inline policy.
-4. In the JSON tab specify:
+Allow Lambda execution role to publish to SNS topics. You can use the following permission statement.
 
     {
         "Version": "2012-10-17",
@@ -99,11 +94,16 @@ Allow Lambda execution role to publish to SNS topics.
         ]
     }
 
+1. Select the Permission tab.
+2. Click the role name to open it in IAM.
+3. Click + Add inline policy.
+4. In the JSON tab specify the statement above.
+
 See also [Give users permissions to publish to the topic ](https://docs.aws.amazon.com/sns/latest/dg/sns-http-https-endpoint-as-subscriber.html#SendMessageToHttp.iam.permissions).
 
 ### Testing
 
 Use cURL to submit a test message. Use the endpoint URL shown in the function properties. Below is an example of a Sendgrid webhook request:
 
-    curl -X POST -i -H "Content-Type: application/json" -d '[{"email":"john.doe@sendgrid.com","timestamp":1588777534,"smtp-id":"<4FB4041F.6080505@sendgrid.com>","event":"processed"},{"email":"john.doe@sendgrid.com","timestamp":1588777600,"category":"newuser","event":"click","url":"https://sendgrid.com"},{"email":"john.doe@sendgrid.com","timestamp":1588777692,"smtp-id":"<20120525181309.C1A9B40405B3@Example-Mac.local>","event":"processed"}]' https://xxxxxx.execute-api.eu-west-1.amazonaws.com/default/webhook-endpoint
+    curl -X POST -i -H "Content-Type: application/json" -d '[{"email":"john.doe@sendgrid.com","timestamp":1588777534,"smtp-id":"<4FB4041F.6080505@sendgrid.com>","event":"processed"}]' https://xxxxxx.execute-api.eu-west-1.amazonaws.com/default/webhook-endpoint
 
